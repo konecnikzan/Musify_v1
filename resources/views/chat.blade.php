@@ -53,99 +53,230 @@
                             <p class="text-muted">Wanna grab a beer?</p>
                         </div>
                     </div>
-                    <div class="messages_bg">
-                        <img class="match-profile-image" src="https://www.clarity-enhanced.net/wp-content/uploads/2020/06/optimus-prime.jpeg" alt="">
-                        <div class="text">
-                            <h6><b>Optimus</b></h6>
-                            <p class="text-muted">Wanna grab a beer?</p>
-                        </div>
-                    </div>
-                    <div class="messages_bg">
-                        <img class="match-profile-image" src="https://www.clarity-enhanced.net/wp-content/uploads/2020/06/optimus-prime.jpeg" alt="">
-                        <div class="text">
-                            <h6><b>Optimus</b></h6>
-                            <p class="text-muted">Wanna grab a beer?</p>
-                        </div>
-                    </div>
-                    <div class="messages_bg">
-                        <img class="match-profile-image" src="https://www.clarity-enhanced.net/wp-content/uploads/2020/06/optimus-prime.jpeg" alt="">
-                        <div class="text">
-                            <h6><b>Optimus</b></h6>
-                            <p class="text-muted">Wanna grab a beer?</p>
-                        </div>
-                    </div>
-                    <div class="messages_bg">
-                        <img class="match-profile-image" src="https://www.clarity-enhanced.net/wp-content/uploads/2020/06/optimus-prime.jpeg" alt="">
-                        <div class="text">
-                            <h6><b>Optimus</b></h6>
-                            <p class="text-muted">Wanna grab a beer?</p>
-                        </div>
-                    </div>
-                    <div class="messages_bg">
-                        <img class="match-profile-image" src="https://www.clarity-enhanced.net/wp-content/uploads/2020/06/optimus-prime.jpeg" alt="">
-                        <div class="text">
-                            <h6><b>Optimus</b></h6>
-                            <p class="text-muted">Wanna grab a beer?</p>
-                        </div>
-                    </div>
-                    <div class="messages_bg">
-                        <img class="match-profile-image" src="https://www.clarity-enhanced.net/wp-content/uploads/2020/06/optimus-prime.jpeg" alt="">
-                        <div class="text">
-                            <h6><b>Optimus</b></h6>
-                            <p class="text-muted">Wanna grab a beer?</p>
-                        </div>
-                    </div>
-                    <div class="messages_bg">
-                        <img class="match-profile-image" src="https://www.clarity-enhanced.net/wp-content/uploads/2020/06/optimus-prime.jpeg" alt="">
-                        <div class="text">
-                            <h6><b>Optimus</b></h6>
-                            <p class="text-muted">Wanna grab a beer?</p>
-                        </div>
-                    </div>
-                    <div class="messages_bg">
-                        <img class="match-profile-image" src="https://www.clarity-enhanced.net/wp-content/uploads/2020/06/optimus-prime.jpeg" alt="">
-                        <div class="text">
-                            <h6><b>Optimus</b></h6>
-                            <p class="text-muted">Wanna grab a beer?</p>
-                        </div>
-                    </div>
-                    <div class="messages_bg">
-                        <img class="match-profile-image" src="https://www.clarity-enhanced.net/wp-content/uploads/2020/06/optimus-prime.jpeg" alt="">
-                        <div class="text">
-                            <h6><b>Optimus</b></h6>
-                            <p class="text-muted">Wanna grab a beer?</p>
-                        </div>
-                    </div>
-                    <div class="messages_bg">
-                        <img class="match-profile-image" src="https://www.clarity-enhanced.net/wp-content/uploads/2020/06/optimus-prime.jpeg" alt="">
-                        <div class="text">
-                            <h6><b>Optimus</b></h6>
-                            <p class="text-muted">Wanna grab a beer?</p>
-                        </div>
-                    </div>
-                    <div class="messages_bg">
-                        <img class="match-profile-image" src="https://www.clarity-enhanced.net/wp-content/uploads/2020/06/optimus-prime.jpeg" alt="">
-                        <div class="text">
-                            <h6><b>Optimus</b></h6>
-                            <p class="text-muted">Wanna grab a beer?</p>
-                        </div>
-                    </div>
-                    <div class="messages_bg">
-                        <img class="match-profile-image" src="https://www.clarity-enhanced.net/wp-content/uploads/2020/06/optimus-prime.jpeg" alt="">
-                        <div class="text">
-                            <h6><b>Optimus</b></h6>
-                            <p class="text-muted">Wanna grab a beer?</p>
-                        </div>
-                    </div>
                 </div>
             </div>
         </nav>
 
         <!-- Page Content  -->
-        <div class="p-4 p-md-5 pt-5" style="width: 60vw">   
-            <div id="app">
-                <chat-component></chat-component>
-            </div>    
+        <div class="p-4 p-md-5 pt-5" style="width: 60vw;margin: 0 auto;height: 950px;">   
+            <section class="msger">
+                <main class="msger-chat">
+                    <div class="msg left-msg">
+                        <div
+                        class="msg-img"
+                        style="background-image: url(https://image.flaticon.com/icons/svg/327/327779.svg)"
+                        ></div>
+
+                        <div class="msg-bubble">
+                        <div class="msg-info">
+                            <div class="msg-info-name">BOT</div>
+                            <div class="msg-info-time">12:45</div>
+                        </div>
+
+                        <div class="msg-text">
+                            Hi, welcome to SimpleChat! Go ahead and send me a message.ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff😄
+                        </div>
+                        </div>
+                    </div>
+
+                    <div class="msg right-msg">
+                        <div
+                        class="msg-img"
+                        style="background-image: url(https://image.flaticon.com/icons/svg/145/145867.svg)"
+                        ></div>
+
+                        <div class="msg-bubble">
+                        <div class="msg-info">
+                            <div class="msg-info-name">Sajad</div>
+                            <div class="msg-info-time">12:46</div>
+                        </div>
+
+                        <div class="msg-text">
+                            You can change your name in JS section!
+                        </div>
+                        </div>
+                    </div>
+                    <div class="msg left-msg">
+                    <div
+                    class="msg-img"
+                    style="background-image: url(https://image.flaticon.com/icons/svg/327/327779.svg)"
+                    ></div>
+
+                    <div class="msg-bubble">
+                    <div class="msg-info">
+                        <div class="msg-info-name">BOT</div>
+                        <div class="msg-info-time">12:45</div>
+                    </div>
+
+                    <div class="msg-text">
+                        Hi, welcome to SimpleChat! Go ahead and send me a message.ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff😄
+                    </div>
+                    </div>
+                </div>
+
+                <div class="msg right-msg">
+                    <div
+                    class="msg-img"
+                    style="background-image: url(https://image.flaticon.com/icons/svg/145/145867.svg)"
+                    ></div>
+
+                    <div class="msg-bubble">
+                    <div class="msg-info">
+                        <div class="msg-info-name">Sajad</div>
+                        <div class="msg-info-time">12:46</div>
+                    </div>
+
+                    <div class="msg-text">
+                        You can change your name in JS section!
+                    </div>
+                    </div>
+                </div>
+                <div class="msg left-msg">
+                    <div
+                    class="msg-img"
+                    style="background-image: url(https://image.flaticon.com/icons/svg/327/327779.svg)"
+                    ></div>
+
+                    <div class="msg-bubble">
+                    <div class="msg-info">
+                        <div class="msg-info-name">BOT</div>
+                        <div class="msg-info-time">12:45</div>
+                    </div>
+
+                    <div class="msg-text">
+                        Hi, welcome to SimpleChat! Go ahead and send me a message.ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff😄
+                    </div>
+                    </div>
+                </div>
+
+                <div class="msg right-msg">
+                    <div
+                    class="msg-img"
+                    style="background-image: url(https://image.flaticon.com/icons/svg/145/145867.svg)"
+                    ></div>
+
+                    <div class="msg-bubble">
+                    <div class="msg-info">
+                        <div class="msg-info-name">Sajad</div>
+                        <div class="msg-info-time">12:46</div>
+                    </div>
+
+                    <div class="msg-text">
+                        You can change your name in JS section!
+                    </div>
+                    </div>
+                </div>
+                <div class="msg left-msg">
+                    <div
+                    class="msg-img"
+                    style="background-image: url(https://image.flaticon.com/icons/svg/327/327779.svg)"
+                    ></div>
+
+                    <div class="msg-bubble">
+                    <div class="msg-info">
+                        <div class="msg-info-name">BOT</div>
+                        <div class="msg-info-time">12:45</div>
+                    </div>
+
+                    <div class="msg-text">
+                        Hi, welcome to SimpleChat! Go ahead and send me a message.ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff😄
+                    </div>
+                    </div>
+                </div>
+
+                <div class="msg right-msg">
+                    <div
+                    class="msg-img"
+                    style="background-image: url(https://image.flaticon.com/icons/svg/145/145867.svg)"
+                    ></div>
+
+                    <div class="msg-bubble">
+                    <div class="msg-info">
+                        <div class="msg-info-name">Sajad</div>
+                        <div class="msg-info-time">12:46</div>
+                    </div>
+
+                    <div class="msg-text">
+                        You can change your name in JS section!
+                    </div>
+                    </div>
+                </div>
+                <div class="msg left-msg">
+                    <div
+                    class="msg-img"
+                    style="background-image: url(https://image.flaticon.com/icons/svg/327/327779.svg)"
+                    ></div>
+
+                    <div class="msg-bubble">
+                    <div class="msg-info">
+                        <div class="msg-info-name">BOT</div>
+                        <div class="msg-info-time">12:45</div>
+                    </div>
+
+                    <div class="msg-text">
+                        Hi, welcome to SimpleChat! Go ahead and send me a message.ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff😄
+                    </div>
+                    </div>
+                </div>
+
+                <div class="msg right-msg">
+                    <div
+                    class="msg-img"
+                    style="background-image: url(https://image.flaticon.com/icons/svg/145/145867.svg)"
+                    ></div>
+
+                    <div class="msg-bubble">
+                    <div class="msg-info">
+                        <div class="msg-info-name">Sajad</div>
+                        <div class="msg-info-time">12:46</div>
+                    </div>
+
+                    <div class="msg-text">
+                        You can change your name in JS section!
+                    </div>
+                    </div>
+                </div>
+                <div class="msg left-msg">
+                    <div
+                    class="msg-img"
+                    style="background-image: url(https://image.flaticon.com/icons/svg/327/327779.svg)"
+                    ></div>
+
+                    <div class="msg-bubble">
+                    <div class="msg-info">
+                        <div class="msg-info-name">BOT</div>
+                        <div class="msg-info-time">12:45</div>
+                    </div>
+
+                    <div class="msg-text">
+                        Hi, welcome to SimpleChat! Go ahead and send me a message.ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff😄
+                    </div>
+                    </div>
+                </div>
+
+                <div class="msg right-msg">
+                    <div
+                    class="msg-img"
+                    style="background-image: url(https://image.flaticon.com/icons/svg/145/145867.svg)"
+                    ></div>
+
+                    <div class="msg-bubble">
+                    <div class="msg-info">
+                        <div class="msg-info-name">Sajad</div>
+                        <div class="msg-info-time">12:46</div>
+                    </div>
+
+                    <div class="msg-text">
+                        You can change your name in JS section!
+                    </div>
+                    </div>
+                </div>
+                </main>
+
+                <form class="msger-inputarea">
+                    <input type="text" class="msger-input" placeholder="Enter your message...">
+                </form>
+            </section>
         </div>   
     </div>
 
