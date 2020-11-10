@@ -63,7 +63,7 @@
                     <div class="ds-top"></div>
                     <div class="avatar-holder">
                         <img class="avatar{{ $i }}" src="{{ $item[2][0]->avatar }}" onmouseover="showChat(this, '{{ $i }}')">
-                        <a href="{{ route('chat') }}" class="chat{{ $i }}" style="display: none;" onmouseout="hideChat(this, '{{ $i }}')"><img src="{{ asset('images/chat.png') }}"></a>
+                        <a href="{{ route('chat', ['id' => Auth::user()->id . '&' . $item[0]]) }}" class="chat{{ $i }}" style="display: none;" onmouseout="hideChat(this, '{{ $i }}')"><img src="{{ asset('images/chat.png') }}"></a>
                     </div>
                     <div class="name">
                         <a href="{{ route('profile', $item[0]) }}">{{ $item[1][0]->name }}</a>  
