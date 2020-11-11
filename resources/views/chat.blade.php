@@ -47,246 +47,60 @@
                 </div>
                 <div class="main_messages">
                     @foreach ($latestMessages as $message)
-                        <div class="messages_bg">
-                            @if($message->sender_id != Auth::user()->id)
+                        @if($message->sender_id != Auth::user()->id)
+                            <div class="messages_bg" id="{{ $message->sender_id }}">
                                 <img class="match-profile-image" src="{{ $message->sender_avatar }}" alt="">
-                            @elseif($message->recipient_id != Auth::user()->id)  
-                                <img class="match-profile-image" src="{{ $message->recipient_avatar }}" alt="">
-                            @endif
-                            <span class="pending dot"></span>
-                            <div class="text">
-                                @if($message->sender_id != Auth::user()->id)
-                                    <h6><b>{{ $message->sender_name }}</b></h6> 
-                                @elseif($message->recipient_id != Auth::user()->id)  
-                                    <h6><b>{{ $message->recipient_name }}</b></h6> 
-                                @endif                              
-                                <p class="text-muted">{{ $message->message }}</p>
+                                <span class="pending dot"></span>
+                                <div class="text">
+                                    <h6><b>{{ $message->sender_name }}</b></h6>                             
+                                    <p class="text-muted">{{ $message->message }}</p>
+                                </div>
                             </div>
-                        </div>
+                        @elseif($message->recipient_id != Auth::user()->id)  
+                            <div class="messages_bg" id="{{ $message->recipient_id }}">
+                                <img class="match-profile-image" src="{{ $message->recipient_avatar }}" alt="">
+                                <span class="pending dot"></span>
+                                <div class="text">
+                                    <h6><b>{{ $message->recipient_name }}</b></h6>                             
+                                    <p class="text-muted">{{ $message->message }}</p>
+                                </div>
+                            </div>
+                        @endif
                     @endforeach    
                 </div>
             </div>
         </nav>
 
         <!-- Page Content  -->
-        <div class="p-4 p-md-5 pt-5" style="width: 60vw;margin: 0 auto;height: 1000px;">   
+        <div class="p-4 p-md-5 pt-5" style="width: 60vw;margin: 0 auto;height: 1000px;" id="messages_view">   
             <section class="msger">
                 <main class="msger-chat">
-                    <div class="msg left-msg">
-                        <div
-                        class="msg-img"
-                        style="background-image: url(https://image.flaticon.com/icons/svg/327/327779.svg)"
-                        ></div>
+                    @foreach($allMessages as $message)
+                        <div class="msg {{ ($message->from == Auth::id()) ? 'right-msg' : 'left-msg' }}">
+                            @foreach($allUsers as $user)
+                                @if($user->id == $message->from)
+                                    <div class="msg-img" style="background-image: url({{ $user->avatar }})"
+                                    ></div>
 
-                        <div class="msg-bubble">
-                        <div class="msg-info">
-                            <div class="msg-info-name">BOT</div>
-                            <div class="msg-info-time">12:45</div>
+                                    <div class="msg-bubble">
+                                        <div class="msg-info">
+                                            <div class="msg-info-name">{{ $user->name }}</div>
+                                            <div class="msg-info-time">{{ date('d.m.Y, h:i ', strtotime($message->created_at)) }}</div>
+                                        </div>
+
+                                        <div class="msg-text">
+                                            {{ $message->message }}
+                                        </div>
+                                    </div>
+                                @endif
+                            @endforeach
                         </div>
-
-                        <div class="msg-text">
-                            Hi, welcome to SimpleChat! Go ahead and send me a message.ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff😄
-                        </div>
-                        </div>
-                    </div>
-
-                    <div class="msg right-msg">
-                        <div
-                        class="msg-img"
-                        style="background-image: url(https://image.flaticon.com/icons/svg/145/145867.svg)"
-                        ></div>
-
-                        <div class="msg-bubble">
-                        <div class="msg-info">
-                            <div class="msg-info-name">Sajad</div>
-                            <div class="msg-info-time">12:46</div>
-                        </div>
-
-                        <div class="msg-text">
-                            You can change your name in JS section!
-                        </div>
-                        </div>
-                    </div>
-                    <div class="msg left-msg">
-                    <div
-                    class="msg-img"
-                    style="background-image: url(https://image.flaticon.com/icons/svg/327/327779.svg)"
-                    ></div>
-
-                    <div class="msg-bubble">
-                    <div class="msg-info">
-                        <div class="msg-info-name">BOT</div>
-                        <div class="msg-info-time">12:45</div>
-                    </div>
-
-                    <div class="msg-text">
-                        Hi, welcome to SimpleChat! Go ahead and send me a message.ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff😄
-                    </div>
-                    </div>
-                </div>
-
-                <div class="msg right-msg">
-                    <div
-                    class="msg-img"
-                    style="background-image: url(https://image.flaticon.com/icons/svg/145/145867.svg)"
-                    ></div>
-
-                    <div class="msg-bubble">
-                    <div class="msg-info">
-                        <div class="msg-info-name">Sajad</div>
-                        <div class="msg-info-time">12:46</div>
-                    </div>
-
-                    <div class="msg-text">
-                        You can change your name in JS section!
-                    </div>
-                    </div>
-                </div>
-                <div class="msg left-msg">
-                    <div
-                    class="msg-img"
-                    style="background-image: url(https://image.flaticon.com/icons/svg/327/327779.svg)"
-                    ></div>
-
-                    <div class="msg-bubble">
-                    <div class="msg-info">
-                        <div class="msg-info-name">BOT</div>
-                        <div class="msg-info-time">12:45</div>
-                    </div>
-
-                    <div class="msg-text">
-                        Hi, welcome to SimpleChat! Go ahead and send me a message.ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff😄
-                    </div>
-                    </div>
-                </div>
-
-                <div class="msg right-msg">
-                    <div
-                    class="msg-img"
-                    style="background-image: url(https://image.flaticon.com/icons/svg/145/145867.svg)"
-                    ></div>
-
-                    <div class="msg-bubble">
-                    <div class="msg-info">
-                        <div class="msg-info-name">Sajad</div>
-                        <div class="msg-info-time">12:46</div>
-                    </div>
-
-                    <div class="msg-text">
-                        You can change your name in JS section!
-                    </div>
-                    </div>
-                </div>
-                <div class="msg left-msg">
-                    <div
-                    class="msg-img"
-                    style="background-image: url(https://image.flaticon.com/icons/svg/327/327779.svg)"
-                    ></div>
-
-                    <div class="msg-bubble">
-                    <div class="msg-info">
-                        <div class="msg-info-name">BOT</div>
-                        <div class="msg-info-time">12:45</div>
-                    </div>
-
-                    <div class="msg-text">
-                        Hi, welcome to SimpleChat! Go ahead and send me a message.ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff😄
-                    </div>
-                    </div>
-                </div>
-
-                <div class="msg right-msg">
-                    <div
-                    class="msg-img"
-                    style="background-image: url(https://image.flaticon.com/icons/svg/145/145867.svg)"
-                    ></div>
-
-                    <div class="msg-bubble">
-                    <div class="msg-info">
-                        <div class="msg-info-name">Sajad</div>
-                        <div class="msg-info-time">12:46</div>
-                    </div>
-
-                    <div class="msg-text">
-                        You can change your name in JS section!
-                    </div>
-                    </div>
-                </div>
-                <div class="msg left-msg">
-                    <div
-                    class="msg-img"
-                    style="background-image: url(https://image.flaticon.com/icons/svg/327/327779.svg)"
-                    ></div>
-
-                    <div class="msg-bubble">
-                    <div class="msg-info">
-                        <div class="msg-info-name">BOT</div>
-                        <div class="msg-info-time">12:45</div>
-                    </div>
-
-                    <div class="msg-text">
-                        Hi, welcome to SimpleChat! Go ahead and send me a message.ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff😄
-                    </div>
-                    </div>
-                </div>
-
-                <div class="msg right-msg">
-                    <div
-                    class="msg-img"
-                    style="background-image: url(https://image.flaticon.com/icons/svg/145/145867.svg)"
-                    ></div>
-
-                    <div class="msg-bubble">
-                    <div class="msg-info">
-                        <div class="msg-info-name">Sajad</div>
-                        <div class="msg-info-time">12:46</div>
-                    </div>
-
-                    <div class="msg-text">
-                        You can change your name in JS section!
-                    </div>
-                    </div>
-                </div>
-                <div class="msg left-msg">
-                    <div
-                    class="msg-img"
-                    style="background-image: url(https://image.flaticon.com/icons/svg/327/327779.svg)"
-                    ></div>
-
-                    <div class="msg-bubble">
-                    <div class="msg-info">
-                        <div class="msg-info-name">BOT</div>
-                        <div class="msg-info-time">12:45</div>
-                    </div>
-
-                    <div class="msg-text">
-                        Hi, welcome to SimpleChat! Go ahead and send me a message.ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff😄
-                    </div>
-                    </div>
-                </div>
-
-                <div class="msg right-msg">
-                    <div
-                    class="msg-img"
-                    style="background-image: url(https://image.flaticon.com/icons/svg/145/145867.svg)"
-                    ></div>
-
-                    <div class="msg-bubble">
-                    <div class="msg-info">
-                        <div class="msg-info-name">Sajad</div>
-                        <div class="msg-info-time">12:46</div>
-                    </div>
-
-                    <div class="msg-text">
-                        You can change your name in JS section!
-                    </div>
-                    </div>
-                </div>
+                    @endforeach    
                 </main>
 
-                <form class="msger-inputarea">
-                    <input type="text" class="msger-input" placeholder="Enter your message...">
-                </form>
+                <div class="msger-inputarea">
+                    <input id="send-message" type="text" class="msger-input" placeholder="Enter your message...">
+                </div>
             </section>
         </div>   
     </div>
@@ -303,8 +117,39 @@
             $('.messages_bg').click(function () {
                 $('.messages_bg').removeClass('active');
                 $(this).addClass('active');
+
+                receiver_id = $(this).attr('id');
+                string = "{{ Auth::id() }}" + "&" + String(receiver_id);
+
+                var url = "{{route('chat', '')}}" + "/" + string;
+                window.location = url;
+            });
+        });
+
+        $("#send-message").on("keydown",function search(e) {
+            var message = $(this).val();
+
+            receiver_id = (window.location.href.split('/')[4]).split('&')[1];
+
+            if(e.keyCode == 13) {
+                $(this).val(''); // while pressed enter text box will be empty
+                var datastr = "receiver_id=" + receiver_id + "&message=" + message;
+                
+                $.ajax({
+                    type: "post",
+                    url: "message", // need to create this post route
+                    data: datastr,
+                    cache: false,
+                    success: function (data) {
+                    },
+                    error: function (jqXHR, status, err) {
+                    },
+                    complete: function () {
+                        scrollToBottomFunc();
+                    }
+                });
             }
-        }
+        });
     </script>    
 
 </body>

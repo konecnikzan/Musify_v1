@@ -20,8 +20,9 @@ class MessagesController extends Controller
 
     public function index($id)
     {
-        $allUsers = User::where('id', '!=', Auth::user()->id)->get();
+        $allUsers = User::all();
             
+        //SIDEBAR
         $latestMessages = DB::select("SELECT sender.id AS sender_id , recipient.id AS recipient_id , m.created_at ,m.message, 
                 sender.name AS sender_name , recipient.name AS recipient_name, sender.avatar AS sender_avatar , recipient.avatar AS recipient_avatar
             FROM messages AS m 
@@ -34,7 +35,26 @@ class MessagesController extends Controller
             WHERE m.from = '" . Auth::user()->id . "' OR m.to = '" . Auth::user()->id . "'
             ORDER BY m.created_at DESC");
 
-        return view('chat', compact('allUsers', 'latestMessages'));
+
+        $messaged_user_id = explode("&", $id)[1];
+        //MESSAGES VIEW
+        $my_id = Auth::id();
+
+        // Make read all unread message
+        Message::where(['from' => $messaged_user_id, 'to' => $my_id])->update(['is_read' => 1]);
+
+        // Get all message from selected user
+        $allMessages = Message::where(function ($query) use ($messaged_user_id, $my_id) {
+            $query->where('from', $messaged_user_id)->where('to', $my_id);
+        })->oRwhere(function ($query) use ($messaged_user_id, $my_id) {
+            $query->where('from', $my_id)->where('to', $messaged_user_id);
+        })->get(); 
+
+        return view('chat', compact('allUsers', 'latestMessages', 'allMessages'));
+    }
+
+    public function getMessage($id) {
+        return $id;
     }
 
 }
