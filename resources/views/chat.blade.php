@@ -50,7 +50,9 @@
                         @if($message->sender_id != Auth::user()->id)
                             <div class="messages_bg" id="{{ $message->sender_id }}">
                                 <img class="match-profile-image" src="{{ $message->sender_avatar }}" alt="">
-                                <span class="pending dot"></span>
+                                @if(!$message->is_read)
+                                    <span class="pending dot"></span>
+                                @endif   
                                 <div class="text">
                                     <h6><b>{{ $message->sender_name }}</b></h6>                             
                                     <p class="text-muted">{{ $message->message }}</p>
@@ -105,7 +107,7 @@
         </div>   
     </div>
 
-    <script src="https://js.pusher.com/4.1/pusher.min.js"></script>
+    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <!--<script src="{{ asset('js/app.js') }}" defer></script>-->
 
@@ -114,6 +116,41 @@
         var my_id = "{{ Auth::id() }}";
 
         $(document).ready(function () {
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            // Enable pusher logging - don't include this in production
+            Pusher.logToConsole = true;
+            var pusher = new Pusher('e1ee26220f469456e168', {
+                cluster: 'eu',
+                forceTLS: true
+            });
+
+            var channel = pusher.subscribe('my-channel');
+            channel.bind('my-event', function (data) {
+                alert(JSON.stringify(data));
+                if (my_id == data.from) {
+                    $('#' + data.to).click();
+                } else if (my_id == data.to) {
+                    if (receiver_id == data.from) {
+                        // if receiver is selected, reload the selected user ...
+                        $('#' + data.from).click();
+                    } else {
+                        // if receiver is not seleted, add notification for that user
+                        var pending = parseInt($('#' + data.from).find('.pending').html());
+                        if (pending) {
+                            $('#' + data.from).find('.pending').html(pending + 1);
+                        } else {
+                            $('#' + data.from).append('<span class="pending">1</span>');
+                        }
+                    }
+                }
+            });
+
             $('.messages_bg').click(function () {
                 $('.messages_bg').removeClass('active');
                 $(this).addClass('active');
@@ -137,7 +174,7 @@
                 
                 $.ajax({
                     type: "post",
-                    url: "message", // need to create this post route
+                    url: "http://musify.com/message", // need to create this post route
                     data: datastr,
                     cache: false,
                     success: function (data) {
@@ -150,6 +187,12 @@
                 });
             }
         });
+
+        function scrollToBottomFunc() {
+            $('.msger-chat').animate({
+                scrollTop: $('.msger-chat').get(0).scrollHeight
+            }, 50);
+        }
     </script>    
 
 </body>

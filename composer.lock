@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b7a10f568a85104df9430fefb48fa59f",
+    "content-hash": "f7a4fe6a6a2b2ae532de934ce428b2af",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1536,62 +1536,6 @@
             "time": "2020-07-23T08:41:23+00:00"
         },
         {
-            "name": "munafio/chatify",
-            "version": "v1.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/munafio/chatify.git",
-                "reference": "7b12cfabeac9a8255c6864462671f23479cc1317"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/munafio/chatify/zipball/7b12cfabeac9a8255c6864462671f23479cc1317",
-                "reference": "7b12cfabeac9a8255c6864462671f23479cc1317",
-                "shasum": ""
-            },
-            "require": {
-                "pusher/pusher-php-server": "^3.4@dev"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Chatify\\ChatifyServiceProvider"
-                    ],
-                    "aliases": {
-                        "Chatify": "Chatify\\Facades\\ChatifyMessenger"
-                    }
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Chatify\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Munaf A. Mahdi",
-                    "email": "munafaqeelmahdi@gmail.com"
-                }
-            ],
-            "description": "A package for Laravel PHP Framework to add a complete real-time chat system.",
-            "keywords": [
-                "Messenger",
-                "chat",
-                "conversations",
-                "laravel",
-                "php",
-                "pusher",
-                "real-time",
-                "realtime"
-            ],
-            "time": "2020-09-13T11:03:52+00:00"
-        },
-        {
             "name": "nesbot/carbon",
             "version": "2.41.5",
             "source": {
@@ -2299,7 +2243,7 @@
         },
         {
             "name": "pusher/pusher-php-server",
-            "version": "dev-master",
+            "version": "v4.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pusher/pusher-http-php.git",

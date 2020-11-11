@@ -27,6 +27,6 @@ Route::get('/social-login/{provider}/callback', 'Auth\LoginController@handleProv
 Route::get('/profile/{id}', 'ProfileController@show_profile')->name('profile');
 
 Route::get('/chat/{id}', 'MessagesController@index')->name('chat');
-
+Route::post('message', 'MessagesController@sendMessage');
 
 

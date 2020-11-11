@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Message;
 use DB;
+use Pusher\Pusher;
 
 class MessagesController extends Controller
 {
@@ -24,7 +25,8 @@ class MessagesController extends Controller
             
         //SIDEBAR
         $latestMessages = DB::select("SELECT sender.id AS sender_id , recipient.id AS recipient_id , m.created_at ,m.message, 
-                sender.name AS sender_name , recipient.name AS recipient_name, sender.avatar AS sender_avatar , recipient.avatar AS recipient_avatar
+                sender.name AS sender_name , recipient.name AS recipient_name, sender.avatar AS sender_avatar , recipient.avatar AS recipient_avatar,
+                m.is_read AS is_read
             FROM messages AS m 
             INNER JOIN users AS sender ON sender.id = m.from 
             INNER JOIN users AS recipient ON recipient.id = m.to 
@@ -53,8 +55,34 @@ class MessagesController extends Controller
         return view('chat', compact('allUsers', 'latestMessages', 'allMessages'));
     }
 
-    public function getMessage($id) {
-        return $id;
+    public function sendMessage(Request $request)
+    {
+        $from = Auth::id();
+        $to = $request->receiver_id;
+        $message = $request->message;
+
+        $data = new Message();
+        $data->from = $from;
+        $data->to = $to;
+        $data->message = $message;
+        $data->is_read = 0; // message will be unread when sending message
+        $data->save();
+
+        // pusher
+        $options = array(
+            'cluster' => 'eu',
+            'useTLS' => true
+        );
+
+        $pusher = new Pusher(
+            env('PUSHER_APP_KEY'),
+            env('PUSHER_APP_SECRET'),
+            env('PUSHER_APP_ID'),
+            $options
+        );
+
+        $data = ['from' => $from, 'to' => $to]; // sending from and to user id when pressed enter
+        $pusher->trigger('my-channel', 'my-event', $data);
     }
 
 }
