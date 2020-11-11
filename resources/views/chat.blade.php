@@ -46,19 +46,30 @@
                     <h6 id="messages_text"><b>Messages</b></h6>
                 </div>
                 <div class="main_messages">
-                    <div class="messages_bg">
-                        <img class="match-profile-image" src="https://www.clarity-enhanced.net/wp-content/uploads/2020/06/optimus-prime.jpeg" alt="">
-                        <div class="text">
-                            <h6><b>Optimus</b></h6>
-                            <p class="text-muted">Wanna grab a beer?</p>
+                    @foreach ($latestMessages as $message)
+                        <div class="messages_bg">
+                            @if($message->sender_id != Auth::user()->id)
+                                <img class="match-profile-image" src="{{ $message->sender_avatar }}" alt="">
+                            @elseif($message->recipient_id != Auth::user()->id)  
+                                <img class="match-profile-image" src="{{ $message->recipient_avatar }}" alt="">
+                            @endif
+                            <span class="pending dot"></span>
+                            <div class="text">
+                                @if($message->sender_id != Auth::user()->id)
+                                    <h6><b>{{ $message->sender_name }}</b></h6> 
+                                @elseif($message->recipient_id != Auth::user()->id)  
+                                    <h6><b>{{ $message->recipient_name }}</b></h6> 
+                                @endif                              
+                                <p class="text-muted">{{ $message->message }}</p>
+                            </div>
                         </div>
-                    </div>
+                    @endforeach    
                 </div>
             </div>
         </nav>
 
         <!-- Page Content  -->
-        <div class="p-4 p-md-5 pt-5" style="width: 60vw;margin: 0 auto;height: 950px;">   
+        <div class="p-4 p-md-5 pt-5" style="width: 60vw;margin: 0 auto;height: 1000px;">   
             <section class="msger">
                 <main class="msger-chat">
                     <div class="msg left-msg">
@@ -281,7 +292,20 @@
     </div>
 
     <script src="https://js.pusher.com/4.1/pusher.min.js"></script>
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!--<script src="{{ asset('js/app.js') }}" defer></script>-->
+
+    <script>
+        var receiver_id = '';
+        var my_id = "{{ Auth::id() }}";
+
+        $(document).ready(function () {
+            $('.messages_bg').click(function () {
+                $('.messages_bg').removeClass('active');
+                $(this).addClass('active');
+            }
+        }
+    </script>    
 
 </body>
 

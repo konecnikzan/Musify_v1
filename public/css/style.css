@@ -8390,7 +8390,7 @@ h4 {
 
 .text {
   margin-left: 15px;
-  margin-top: 13px;
+  margin-top: 16px;
 }
 
 .text h6 {
@@ -8690,4 +8690,20 @@ h4 {
 
 .msger-input:focus {
   outline: none;
+}
+
+.dot {
+  height: 20px;
+  width: 20px;
+  background-color: #FF3636;
+  border-radius: 50%;
+  display: inline-block;
+  border: 3px solid white;
+  position: absolute;
+  margin-left: 78px;
+  margin-top: 25px;
+}
+
+.active {
+  background-color: #f5f7fa;
 }
