@@ -20,121 +20,8 @@
 
 <body>
 
-    <div class="wrapper d-flex align-items-stretch">
-        <nav id="sidebar">
-            <div class="custom-menu">
-                <!--<button type="button" id="sidebarCollapse" class="btn btn-primary">
-                    <i class="fa fa-bars"></i>
-                    <span class="sr-only">Toggle Menu</span>
-                    </button>-->
-            </div>
-            <div class="p-4">
-                <div class="avatar_profile">
-                    <a href="{{ route('home') }}"><img class="user_avatar" src="{{ Auth::user()->avatar }}" width="50" height="50"></a>    
-                    <h4><a href="{{ route('profile', Auth::user()->id) }}" class="avatar_text">My Profile</a></h4>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST">
-                        <input type="image" src="{{ asset('images/logout.png') }}" alt="" width="25" height="25">
-                        @csrf
-                    </form>
-                </div>
-                <div class="messages_text_div">
-                    <h6 id="messages_text"><b>Messages</b></h6>
-                </div>
-                <div class="main_messages">
-                    <div class="messages_bg">
-                        <img class="match-profile-image" src="https://www.clarity-enhanced.net/wp-content/uploads/2020/06/optimus-prime.jpeg" alt="">
-                        <div class="text">
-                            <h6><b>Optimus</b></h6>
-                            <p class="text-muted">Wanna grab a beer?</p>
-                        </div>
-                    </div>
-                    <div class="messages_bg">
-                        <img class="match-profile-image" src="https://www.clarity-enhanced.net/wp-content/uploads/2020/06/optimus-prime.jpeg" alt="">
-                        <div class="text">
-                            <h6><b>Optimus</b></h6>
-                            <p class="text-muted">Wanna grab a beer?</p>
-                        </div>
-                    </div>
-                    <div class="messages_bg">
-                        <img class="match-profile-image" src="https://www.clarity-enhanced.net/wp-content/uploads/2020/06/optimus-prime.jpeg" alt="">
-                        <div class="text">
-                            <h6><b>Optimus</b></h6>
-                            <p class="text-muted">Wanna grab a beer?</p>
-                        </div>
-                    </div>
-                    <div class="messages_bg">
-                        <img class="match-profile-image" src="https://www.clarity-enhanced.net/wp-content/uploads/2020/06/optimus-prime.jpeg" alt="">
-                        <div class="text">
-                            <h6><b>Optimus</b></h6>
-                            <p class="text-muted">Wanna grab a beer?</p>
-                        </div>
-                    </div>
-                    <div class="messages_bg">
-                        <img class="match-profile-image" src="https://www.clarity-enhanced.net/wp-content/uploads/2020/06/optimus-prime.jpeg" alt="">
-                        <div class="text">
-                            <h6><b>Optimus</b></h6>
-                            <p class="text-muted">Wanna grab a beer?</p>
-                        </div>
-                    </div>
-                    <div class="messages_bg">
-                        <img class="match-profile-image" src="https://www.clarity-enhanced.net/wp-content/uploads/2020/06/optimus-prime.jpeg" alt="">
-                        <div class="text">
-                            <h6><b>Optimus</b></h6>
-                            <p class="text-muted">Wanna grab a beer?</p>
-                        </div>
-                    </div>
-                    <div class="messages_bg">
-                        <img class="match-profile-image" src="https://www.clarity-enhanced.net/wp-content/uploads/2020/06/optimus-prime.jpeg" alt="">
-                        <div class="text">
-                            <h6><b>Optimus</b></h6>
-                            <p class="text-muted">Wanna grab a beer?</p>
-                        </div>
-                    </div>
-                    <div class="messages_bg">
-                        <img class="match-profile-image" src="https://www.clarity-enhanced.net/wp-content/uploads/2020/06/optimus-prime.jpeg" alt="">
-                        <div class="text">
-                            <h6><b>Optimus</b></h6>
-                            <p class="text-muted">Wanna grab a beer?</p>
-                        </div>
-                    </div>
-                    <div class="messages_bg">
-                        <img class="match-profile-image" src="https://www.clarity-enhanced.net/wp-content/uploads/2020/06/optimus-prime.jpeg" alt="">
-                        <div class="text">
-                            <h6><b>Optimus</b></h6>
-                            <p class="text-muted">Wanna grab a beer?</p>
-                        </div>
-                    </div>
-                    <div class="messages_bg">
-                        <img class="match-profile-image" src="https://www.clarity-enhanced.net/wp-content/uploads/2020/06/optimus-prime.jpeg" alt="">
-                        <div class="text">
-                            <h6><b>Optimus</b></h6>
-                            <p class="text-muted">Wanna grab a beer?</p>
-                        </div>
-                    </div>
-                    <div class="messages_bg">
-                        <img class="match-profile-image" src="https://www.clarity-enhanced.net/wp-content/uploads/2020/06/optimus-prime.jpeg" alt="">
-                        <div class="text">
-                            <h6><b>Optimus</b></h6>
-                            <p class="text-muted">Wanna grab a beer?</p>
-                        </div>
-                    </div>
-                    <div class="messages_bg">
-                        <img class="match-profile-image" src="https://www.clarity-enhanced.net/wp-content/uploads/2020/06/optimus-prime.jpeg" alt="">
-                        <div class="text">
-                            <h6><b>Optimus</b></h6>
-                            <p class="text-muted">Wanna grab a beer?</p>
-                        </div>
-                    </div>
-                    <div class="messages_bg">
-                        <img class="match-profile-image" src="https://www.clarity-enhanced.net/wp-content/uploads/2020/06/optimus-prime.jpeg" alt="">
-                        <div class="text">
-                            <h6><b>Optimus</b></h6>
-                            <p class="text-muted">Wanna grab a beer?</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </nav>
+    <div class="wrapper d-flex align-items-stretch" id="app">
+        <sidebar :user="{{ auth()->user() }}"></sidebar>  
 
         <!-- Page Content  -->
         <div class="p-4 p-md-5 pt-5 profile_content">  
@@ -178,8 +65,19 @@
             </div>
 
         </div>
-  
     </div>
+
+    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="{{ asset('js/app.js') }}" defer></script>
+
+    <script>
+        window.Laravel = {!! json_encode([
+            'csrfToken' => csrf_token(),
+            'baseUrl' => url('/'),
+            'routes' => collect(\Route::getRoutes())->mapWithKeys(function ($route) { return [$route->getName() => $route->uri()]; })
+        ]) !!};
+    </script>
 
 </body>
 

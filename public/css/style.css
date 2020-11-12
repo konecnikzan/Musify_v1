@@ -8380,7 +8380,7 @@ h4 {
   width: 70px;
   height: 70px;
   border-radius: 40px;
-  margin-left: 20px;
+  margin-left: 30px;
 }
 
 #sidebar {
@@ -8389,8 +8389,16 @@ h4 {
 }
 
 .text {
-  margin-left: 15px;
+  margin-left: 20px;
   margin-top: 16px;
+  float: right;
+}
+
+.text-muted {
+  overflow: hidden; /* make sure it hides the content that overflows */
+  white-space: nowrap; /* don't break the line */
+  text-overflow: ellipsis; 
+  width: 150px;
 }
 
 .text h6 {
@@ -8700,7 +8708,7 @@ h4 {
   display: inline-block;
   border: 3px solid white;
   position: absolute;
-  margin-left: 78px;
+  margin-left: -10px;;
   margin-top: 25px;
 }
 

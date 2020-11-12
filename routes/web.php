@@ -29,4 +29,6 @@ Route::get('/profile/{id}', 'ProfileController@show_profile')->name('profile');
 Route::get('/chat/{id}', 'MessagesController@index')->name('chat');
 Route::post('message', 'MessagesController@sendMessage');
 
+Route::get('/contacts', 'ContactsController@get');
+
 
