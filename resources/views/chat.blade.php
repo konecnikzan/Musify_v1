@@ -132,9 +132,9 @@
 
             var channel = pusher.subscribe('my-channel');
             channel.bind('my-event', function (data) {
-                alert(JSON.stringify(data));
+                //alert(JSON.stringify(data));
                 if (my_id == data.from) {
-                    $('#' + data.to).click();
+                    $('#' + data.to).click();           
                 } else if (my_id == data.to) {
                     if (receiver_id == data.from) {
                         // if receiver is selected, reload the selected user ...
