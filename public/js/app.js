@@ -1937,6 +1937,9 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
+    Echo["private"]("messages.".concat(this.user.id)).listen('NewMessage', function (e) {
+      _this.handleIncoming(e.message);
+    });
     axios.get('/contacts').then(function (response) {
       _this.contacts = response.data;
     });
@@ -1946,12 +1949,31 @@ __webpack_require__.r(__webpack_exports__);
       _this.selectedContact = response.data[0];
     });
     axios.get("/conversation/".concat(message_user_id)).then(function (response) {
+      _this.updateUnread(response.data, true);
+
       _this.messages = response.data;
     });
   },
   methods: {
     saveNewMessage: function saveNewMessage(message) {
       this.messages.push(message);
+    },
+    handleIncoming: function handleIncoming(message) {
+      if (message.from == this.selectedContact.id) {
+        this.saveNewMessage(message);
+        return;
+      } //this.updateUnread(message.from_contact, false);
+
+    },
+    updateUnread: function updateUnread(contact, reset) {
+      this.contacts = this.contacts.map(function (single) {
+        if (single.id !== contact.id) {
+          return single;
+        }
+
+        if (reset) single.unread = 0;else single.unread = 1;
+        return single;
+      });
     }
   },
   components: {
@@ -78106,6 +78128,7 @@ var app = new Vue({
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var laravel_echo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! laravel-echo */ "./node_modules/laravel-echo/dist/echo.js");
 window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+window.Popper = __webpack_require__(/*! popper.js */ "./node_modules/popper.js/dist/esm/popper.js")["default"];
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
  * for JavaScript based Bootstrap features such as modals and tabs. This
@@ -78113,7 +78136,6 @@ window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
  */
 
 try {
-  window.Popper = __webpack_require__(/*! popper.js */ "./node_modules/popper.js/dist/esm/popper.js")["default"];
   window.$ = window.jQuery = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 
   __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js");
@@ -78128,10 +78150,24 @@ try {
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /**
+ * Next we will register the CSRF Token as a common header with Axios so that
+ * all outgoing HTTP requests automatically have it attached. This is just
+ * a simple convenience so we don't have to attach every token manually.
+ */
+
+var token = document.head.querySelector('meta[name="csrf-token"]');
+
+if (token) {
+  window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+} else {
+  console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
+}
+/**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
  * allows your team to easily build robust real-time web applications.
  */
+
 
 
 window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
@@ -78139,7 +78175,7 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   broadcaster: 'pusher',
   key: "e1ee26220f469456e168",
   cluster: "eu",
-  forceTLS: true
+  encrypted: true
 });
 
 /***/ }),

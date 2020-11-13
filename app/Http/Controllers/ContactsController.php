@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Message;
 use DB;
+use App\Events\NewMessage;
 
 class ContactsController extends Controller
 {
@@ -53,7 +54,7 @@ class ContactsController extends Controller
             'is_read' => 0
         ]);
 
-        //broadcast(new NewMessage($message));
+        broadcast(new NewMessage($message));
 
         return response()->json($message);
     }
