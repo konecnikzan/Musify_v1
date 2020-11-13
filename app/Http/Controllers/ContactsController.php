@@ -49,10 +49,11 @@ class ContactsController extends Controller
         $message = Message::create([
             'from' => auth()->id(),
             'to' => $request->contact_id,
-            'text' => $request->text
+            'message' => $request->text,
+            'is_read' => 0
         ]);
 
-        broadcast(new NewMessage($message));
+        //broadcast(new NewMessage($message));
 
         return response()->json($message);
     }

@@ -1947,8 +1947,12 @@ __webpack_require__.r(__webpack_exports__);
     });
     axios.get("/conversation/".concat(message_user_id)).then(function (response) {
       _this.messages = response.data;
-      console.log(response.data);
     });
+  },
+  methods: {
+    saveNewMessage: function saveNewMessage(message) {
+      this.messages.push(message);
+    }
   },
   components: {
     Conversation: _Conversation__WEBPACK_IMPORTED_MODULE_0__["default"],
@@ -2073,16 +2077,16 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     sendMessage: function sendMessage(text) {
-      alert(this.contact);
-      /*if (!this.contact) {
-          return;
-      }
+      var _this = this;
+
+      var currentUrl = window.location.pathname;
+      var message_user_id = currentUrl.split('/')[2].split('&')[1];
       axios.post('/conversation/send', {
-          contact_id: this.contact.id,
-          text: text
-      }).then((response) => {
-          this.$emit('new', response.data);
-      })*/
+        contact_id: message_user_id,
+        text: text
+      }).then(function (response) {
+        _this.$emit('new', response.data);
+      });
     }
   },
   components: {
@@ -2185,14 +2189,10 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   watch: {
-    contact: function contact(_contact) {
-      this.scrollToBottom();
-    },
     messages: function messages(_messages) {
       this.scrollToBottom();
     }
-  },
-  mounted: function mounted() {}
+  }
 });
 
 /***/ }),
@@ -65519,7 +65519,8 @@ var render = function() {
           contact: _vm.selectedContact,
           messages: _vm.messages,
           user: _vm.user_data
-        }
+        },
+        on: { new: _vm.saveNewMessage }
       })
     ],
     1

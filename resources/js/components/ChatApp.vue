@@ -1,7 +1,7 @@
 <template>
     <div class="wrapper d-flex align-items-stretch">
         <ContactsList :contacts="contacts" :user="user_data"/>    
-        <Conversation :contact="selectedContact" :messages="messages" :user="user_data"/>
+        <Conversation :contact="selectedContact" :messages="messages" :user="user_data" @new="saveNewMessage"/>
     </div>
 </template>
 
@@ -41,8 +41,12 @@
             axios.get(`/conversation/${message_user_id}`)
                     .then((response) => {
                         this.messages = response.data;
-                        console.log(response.data);  
                 });  
+        }, 
+        methods: {
+            saveNewMessage(message) {
+                this.messages.push(message);
+            }
         },
         components: {Conversation, ContactsList}
     }

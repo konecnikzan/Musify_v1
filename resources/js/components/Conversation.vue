@@ -28,16 +28,15 @@
         },
         methods: {
             sendMessage(text) {
-                alert(this.contact);
-                /*if (!this.contact) {
-                    return;
-                }
+                var currentUrl = window.location.pathname;
+                var message_user_id = (currentUrl.split('/')[2]).split('&')[1]; 
+
                 axios.post('/conversation/send', {
-                    contact_id: this.contact.id,
+                    contact_id: message_user_id,
                     text: text
                 }).then((response) => {
                     this.$emit('new', response.data);
-                })*/
+                })
             }
         },
         components: {MessagesFeed, MessageComposer}

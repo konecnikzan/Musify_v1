@@ -43,15 +43,9 @@
             }
         },
         watch: {
-            contact(contact) {
-                this.scrollToBottom();
-            },
             messages(messages) {
                 this.scrollToBottom();
             }
-        },
-        mounted() {
-
         }
     }
 </script>
