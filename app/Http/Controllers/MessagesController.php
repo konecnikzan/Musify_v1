@@ -55,7 +55,7 @@ class MessagesController extends Controller
         return view('chat', compact('allUsers', 'latestMessages', 'allMessages'));
     }
 
-    public function sendMessage(Request $request)
+    /*public function sendMessage(Request $request)
     {
         $from = Auth::id();
         $to = $request->receiver_id;
@@ -83,6 +83,6 @@ class MessagesController extends Controller
 
         $data = ['from' => $from, 'to' => $to]; // sending from and to user id when pressed enter
         $pusher->trigger('my-channel', 'my-event', $data);
-    }
+    }*/
 
 }

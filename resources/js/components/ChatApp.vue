@@ -1,7 +1,7 @@
 <template>
-    <div class="chat-app">
-        <Conversation :contact="selectedContact" :messages="messages" />
+    <div class="wrapper d-flex align-items-stretch">
         <ContactsList :contacts="contacts" :user="user_data"/>    
+        <Conversation :contact="selectedContact" :messages="messages" :user="user_data"/>
     </div>
 </template>
 
@@ -18,19 +18,31 @@
         },
         data() { 
             return {
-                selectedContact: null,
+                selectedContact: {},
                 messages: [],
                 contacts: [],
                 user_data: this.user
             };
         },
         mounted() {
-            //console.log(this.user);
             axios.get('/contacts')
-                .then((response) => {
-                    //console.log(response.data);
+                .then((response) => {             
                     this.contacts = response.data;
-                });
+                });    
+                
+            var currentUrl = window.location.pathname;
+            var message_user_id = (currentUrl.split('/')[2]).split('&')[1]; 
+
+            axios.get(`/contact/${message_user_id}`)
+                    .then((response) => {
+                        this.selectedContact = response.data[0];
+                }); 
+
+            axios.get(`/conversation/${message_user_id}`)
+                    .then((response) => {
+                        this.messages = response.data;
+                        console.log(response.data);  
+                });  
         },
         components: {Conversation, ContactsList}
     }

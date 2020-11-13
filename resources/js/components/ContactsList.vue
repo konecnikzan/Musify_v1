@@ -53,6 +53,7 @@
             redirect: function (contact_id) {
                 for (var item in this.contacts) {
                     if(item == contact_id) {
+
                         if(this.contacts[item].recipient_id == this.user.id) {
                             window.location.href = '/chat/' + this.user.id + '&' +this.contacts[item].sender_id;
                         } else if (this.contacts[item].sender_id == this.user.id) {

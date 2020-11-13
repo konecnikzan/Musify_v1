@@ -28,4 +28,37 @@ class ContactsController extends Controller
 
         return response()->json($latestMessages);
     }
+
+    public function getMessagesFor($id)
+    {
+        // get all messages between the authenticated user and the selected user
+        $messages = Message::where(function($q) use ($id) {
+            $q->where('from', auth()->id());
+            $q->where('to', $id);
+        })->orWhere(function($q) use ($id) {
+            $q->where('from', $id);
+            $q->where('to', auth()->id());
+        })
+        ->get();
+
+        return response()->json($messages);
+    }
+
+    public function send(Request $request)
+    {
+        $message = Message::create([
+            'from' => auth()->id(),
+            'to' => $request->contact_id,
+            'text' => $request->text
+        ]);
+
+        broadcast(new NewMessage($message));
+
+        return response()->json($message);
+    }
+
+    public function getContactInfo($id) {
+        $userInfo = DB::select("SELECT * FROM users WHERE id = '" . $id . "'");
+        return response()->json($userInfo);
+    }
 }

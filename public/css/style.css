@@ -8636,7 +8636,8 @@ h4 {
 }
 
 .msg-info-time {
-  font-size: 0.85em;
+  font-size: 12px;
+  opacity: 0.5;
 }
 
 .left-msg .msg-bubble {
