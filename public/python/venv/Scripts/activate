@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="D:\Žan\Documents\Diplomska naloga\test files\venv"
+VIRTUAL_ENV="D:\Programs\Programming\XAMPP\htdocs\Musify\public\python\venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

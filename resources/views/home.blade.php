@@ -42,11 +42,21 @@
                         <div class="ds projects">
                             <h6 id="listened_genres">MOST LISTENED GENRES</h6>
                             <ul class="genre_list">
-                                <li>{{ $item[3][0]->genre_name }}</li>
-                                <li>{{ $item[3][1]->genre_name }}</li>
-                                <li>{{ $item[3][2]->genre_name }}</li>
-                                <li>{{ $item[3][3]->genre_name }}</li>
-                                <li>{{ $item[3][4]->genre_name }}</li>
+                                @if(!empty($item[3][0]))
+                                    <li>{{ $item[3][0]->genre_name }}</li>
+                                @endif    
+                                @if(!empty($item[3][1]))    
+                                    <li>{{ $item[3][1]->genre_name }}</li>
+                                @endif    
+                                @if(!empty($item[3][2]))  
+                                    <li>{{ $item[3][2]->genre_name }}</li>
+                                @endif
+                                @if(!empty($item[3][3]))  
+                                    <li>{{ $item[3][3]->genre_name }}</li>
+                                @endif
+                                @if(!empty($item[3][4]))  
+                                    <li>{{ $item[3][4]->genre_name }}</li>
+                                @endif
                             </ul>
                         </div>
                     </div>          

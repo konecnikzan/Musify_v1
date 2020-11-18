@@ -1,7 +1,7 @@
 <template>
     <div class="wrapper d-flex align-items-stretch">
         <ContactsList :contacts="contacts" :user="user_data"/>    
-        <Conversation :contact="selectedContact" :messages="messages" :user="user_data" @new="saveNewMessage"/>
+        <Conversation :contact="selectedContact" :messages="messages" :user="user_data" @new="saveNewMessage" @focused-input="focusedInput"/>
     </div>
 </template>
 
@@ -51,25 +51,49 @@
         }, 
         methods: {
             saveNewMessage(message) {
+                this.contacts = this.contacts.map(function(contact){
+                    if(contact.sender_id == message.to){
+                        console.log("Change message for", message,contact);
+                        contact.message = message.message;
+                        contact.created_at = message.created_at;
+
+                        contact.is_read = (this && this.user);
+                    }
+                    return contact;
+                });
                 this.messages.push(message);
             },
+            focusedInput(id){
+                this.contacts = this.contacts.map(function(contact){
+                    if(contact.sender_id ==id){
+                        contact.is_read = 1;
+                    }
+                    return contact;
+                });
+            },
             handleIncoming(message) {
+                axios.get('/contacts')
+                .then((response) => {             
+                    this.contacts = response.data;
+                });
                 if (message.from == this.selectedContact.id) {
                     this.saveNewMessage(message);
                     return;
                 }
-                //this.updateUnread(message.from_contact, false);
+                this.updateUnread(message, false);
             },
             updateUnread(contact, reset) {
+                //console.log(contact);
                 this.contacts = this.contacts.map((single) => {
+                    console.log(single);
                     if (single.id !== contact.id) {
                         return single;
                     }   
 
                     if (reset)
-                        single.unread = 0;
+                        single.is_read = 0;
                     else
-                        single.unread = 1;
+                        single.is_read = 1;
                     return single;
                 })
             }

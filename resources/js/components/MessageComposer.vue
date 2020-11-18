@@ -1,6 +1,6 @@
 <template>
     <div class="msger-inputarea"> 
-        <input @keydown.enter="send" v-model="message" id="send-message" type="text" class="msger-input" placeholder="Enter your message...">
+        <input @keydown.enter="send"  @focus="focused" v-model="message" id="send-message" type="text" class="msger-input" placeholder="Enter your message...">
     </div>
 </template>
 
@@ -20,6 +20,9 @@
                 }
                 this.$emit('send', this.message);
                 this.message = '';
+            },
+            focused(e){
+                this.$emit('focused-input');
             }
         }
     }

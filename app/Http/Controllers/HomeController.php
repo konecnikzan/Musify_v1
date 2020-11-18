@@ -35,6 +35,8 @@ class HomeController extends Controller
         
         $users = User::where('id', '<>', $user->id)->get();
 
+        //dd($data, $users);
+
         return view('home')->with(['data' => $data, 'users' => $users]);
     }
 }

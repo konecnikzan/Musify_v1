@@ -63,4 +63,10 @@ class ContactsController extends Controller
         $userInfo = DB::select("SELECT * FROM users WHERE id = '" . $id . "'");
         return response()->json($userInfo);
     }
+
+    public function updateConvo($id) {
+        $affected = DB::table('users')
+              ->where('id', $id)
+              ->update(['is_read' => 1]);
+    }
 }
