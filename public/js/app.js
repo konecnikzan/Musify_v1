@@ -1944,21 +1944,27 @@ __webpack_require__.r(__webpack_exports__);
       _this.contacts = response.data;
     });
     var currentUrl = window.location.pathname;
+    var message_from_user_id = currentUrl.split('/')[2].split('&')[0];
     var message_user_id = currentUrl.split('/')[2].split('&')[1];
     axios.get("/contact/".concat(message_user_id)).then(function (response) {
       _this.selectedContact = response.data[0];
     });
     axios.get("/conversation/".concat(message_user_id)).then(function (response) {
-      _this.updateUnread(response.data, true);
-
       _this.messages = response.data;
+    });
+    this.contacts = this.contacts.map(function (contact) {
+      if (contact.sender_id == this.user.id) {
+        contact.is_read = 1;
+        axios.post("/conversation_update/".concat(contact.message_id), {
+          id: contact.id
+        });
+      }
     });
   },
   methods: {
     saveNewMessage: function saveNewMessage(message) {
       this.contacts = this.contacts.map(function (contact) {
         if (contact.sender_id == message.to) {
-          console.log("Change message for", message, contact);
           contact.message = message.message;
           contact.created_at = message.created_at;
           contact.is_read = this && this.user;
@@ -1972,6 +1978,9 @@ __webpack_require__.r(__webpack_exports__);
       this.contacts = this.contacts.map(function (contact) {
         if (contact.sender_id == id) {
           contact.is_read = 1;
+          axios.post("/conversation_update/".concat(contact.message_id), {
+            id: contact.id
+          });
         }
 
         return contact;
@@ -1992,10 +2001,7 @@ __webpack_require__.r(__webpack_exports__);
       this.updateUnread(message, false);
     },
     updateUnread: function updateUnread(contact, reset) {
-      //console.log(contact);
       this.contacts = this.contacts.map(function (single) {
-        console.log(single);
-
         if (single.id !== contact.id) {
           return single;
         }
@@ -2076,6 +2082,10 @@ __webpack_require__.r(__webpack_exports__);
     redirect: function redirect(contact_id) {
       for (var item in this.contacts) {
         if (item == contact_id) {
+          axios.post("/conversation_update/".concat(this.contacts[item].message_id), {
+            id: this.contacts[item].message_id
+          });
+
           if (this.contacts[item].recipient_id == this.user.id) {
             window.location.href = '/chat/' + this.user.id + '&' + this.contacts[item].sender_id;
           } else if (this.contacts[item].sender_id == this.user.id) {
@@ -2282,6 +2292,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      messages: [],
       contacts: [],
       user_data: this.user
     };
@@ -2289,11 +2300,62 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
-    //console.log(this.user);
+    Echo["private"]("messages.".concat(this.user.id)).listen('NewMessage', function (e) {
+      _this.handleIncoming(e.message);
+    });
     axios.get('/contacts').then(function (response) {
-      //console.log(response.data);
       _this.contacts = response.data;
     });
+  },
+  methods: {
+    saveNewMessage: function saveNewMessage(message) {
+      this.contacts = this.contacts.map(function (contact) {
+        if (contact.sender_id == message.to) {
+          contact.message = message.message;
+          contact.created_at = message.created_at;
+          contact.is_read = this && this.user;
+        }
+
+        return contact;
+      });
+      this.messages.push(message);
+    },
+    focusedInput: function focusedInput(id) {
+      this.contacts = this.contacts.map(function (contact) {
+        if (contact.sender_id == id) {
+          contact.is_read = 1;
+          axios.post("/conversation_update/".concat(contact.message_id), {
+            id: contact.id
+          });
+        }
+
+        return contact;
+      });
+    },
+    handleIncoming: function handleIncoming(message) {
+      var _this2 = this;
+
+      axios.get('/contacts').then(function (response) {
+        _this2.contacts = response.data;
+      });
+
+      if (message.from == this.selectedContact.id) {
+        this.saveNewMessage(message);
+        return;
+      }
+
+      this.updateUnread(message, false);
+    },
+    updateUnread: function updateUnread(contact, reset) {
+      this.contacts = this.contacts.map(function (single) {
+        if (single.id !== contact.id) {
+          return single;
+        }
+
+        if (reset) single.is_read = 0;else single.is_read = 1;
+        return single;
+      });
+    }
   },
   components: {
     ContactsList: _ContactsList__WEBPACK_IMPORTED_MODULE_0__["default"]

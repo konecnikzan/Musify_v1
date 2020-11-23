@@ -16,7 +16,7 @@ class ContactsController extends Controller
         //SIDEBAR
         $latestMessages = DB::select("SELECT sender.id AS sender_id , recipient.id AS recipient_id , m.created_at ,m.message, 
                 sender.name AS sender_name , recipient.name AS recipient_name, sender.avatar AS sender_avatar , recipient.avatar AS recipient_avatar,
-                m.is_read AS is_read
+                m.is_read AS is_read, m.id AS message_id
             FROM messages AS m 
             INNER JOIN users AS sender ON sender.id = m.from 
             INNER JOIN users AS recipient ON recipient.id = m.to 
@@ -26,7 +26,7 @@ class ContactsController extends Controller
                 AS T ON T.most_recent_message_id = m.id 
             WHERE m.from = '" . Auth::user()->id . "' OR m.to = '" . Auth::user()->id . "'
             ORDER BY m.created_at DESC");
-
+        
         return response()->json($latestMessages);
     }
 
@@ -49,7 +49,7 @@ class ContactsController extends Controller
     {
         $message = Message::create([
             'from' => auth()->id(),
-            'to' => $request->contact_id,
+            'to' => (int) $request->contact_id,
             'message' => $request->text,
             'is_read' => 0
         ]);
@@ -64,9 +64,9 @@ class ContactsController extends Controller
         return response()->json($userInfo);
     }
 
-    public function updateConvo($id) {
-        $affected = DB::table('users')
-              ->where('id', $id)
+    public function updateConvo($id, Request $request) {
+        $affected = DB::table('messages')
+              ->where('id', $request->id)
               ->update(['is_read' => 1]);
     }
 }

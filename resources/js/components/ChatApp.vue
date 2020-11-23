@@ -31,11 +31,12 @@
                 });
 
             axios.get('/contacts')
-                .then((response) => {             
+                .then((response) => {    
                     this.contacts = response.data;
                 });    
                 
             var currentUrl = window.location.pathname;
+            var message_from_user_id = (currentUrl.split('/')[2]).split('&')[0]; 
             var message_user_id = (currentUrl.split('/')[2]).split('&')[1]; 
 
             axios.get(`/contact/${message_user_id}`)
@@ -45,15 +46,23 @@
 
             axios.get(`/conversation/${message_user_id}`)
                     .then((response) => {
-                        this.updateUnread(response.data, true);
                         this.messages = response.data;
-                });  
+                }); 
+                
+            this.contacts = this.contacts.map(function(contact){
+                if(contact.sender_id == this.user.id){
+                    contact.is_read = 1;
+                    axios.post(`/conversation_update/${contact.message_id}`, {
+                        id: contact.id
+                    })
+                }
+            });    
+                
         }, 
         methods: {
             saveNewMessage(message) {
                 this.contacts = this.contacts.map(function(contact){
                     if(contact.sender_id == message.to){
-                        console.log("Change message for", message,contact);
                         contact.message = message.message;
                         contact.created_at = message.created_at;
 
@@ -65,8 +74,11 @@
             },
             focusedInput(id){
                 this.contacts = this.contacts.map(function(contact){
-                    if(contact.sender_id ==id){
+                    if(contact.sender_id == id){
                         contact.is_read = 1;
+                        axios.post(`/conversation_update/${contact.message_id}`, {
+                            id: contact.id
+                        })
                     }
                     return contact;
                 });
@@ -83,9 +95,7 @@
                 this.updateUnread(message, false);
             },
             updateUnread(contact, reset) {
-                //console.log(contact);
                 this.contacts = this.contacts.map((single) => {
-                    console.log(single);
                     if (single.id !== contact.id) {
                         return single;
                     }   

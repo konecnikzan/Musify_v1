@@ -7,7 +7,8 @@
                 <a href="/home"><img class="user_avatar" :src="user.avatar" width="50" height="50"></a>
                 <h4><a v-bind:href="'/profile/' + user.id" class="avatar_text">My Profile</a></h4>
                 <form id="logout-form" action="/logout" method="POST">
-                        <input type="image" src="/images/logout.png" alt="" width="25" height="25">
+                    @csrf
+                    <input type="image" src="/images/logout.png" alt="" width="25" height="25">
                 </form>
             </div>
             <div class="messages_text_div">
@@ -53,8 +54,11 @@
             redirect: function (contact_id) {
                 for (var item in this.contacts) {
                     if(item == contact_id) {
+                        axios.post(`/conversation_update/${this.contacts[item].message_id}`, {
+                            id: this.contacts[item].message_id
+                        });
                         if(this.contacts[item].recipient_id == this.user.id) {
-                            window.location.href = '/chat/' + this.user.id + '&' +this.contacts[item].sender_id;
+                            window.location.href = '/chat/' + this.user.id + '&' + this.contacts[item].sender_id;
                         } else if (this.contacts[item].sender_id == this.user.id) {
                             window.location.href = '/chat/' + this.user.id + '&' +this.contacts[item].recipient_id;
                         }

@@ -161,7 +161,7 @@ class LoginController extends Controller
             }
         }
 
-        $output = shell_exec('cd python && py script.py '.$getUserId[0]->id.'');
+        /*$output = shell_exec('cd python && py script.py '.$getUserId[0]->id.'');
         //echo "<pre>" . $output . "</pre>";
         //dd($output);
 
@@ -194,7 +194,7 @@ class LoginController extends Controller
             array_push($data, $combined);
         }
 
-        Session::put('data', $data);
+        Session::put('data', $data);*/
         //USER LOGIN
         Auth::login($user);
         return redirect('home');
