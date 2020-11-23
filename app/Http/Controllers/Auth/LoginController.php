@@ -15,6 +15,7 @@ use App\Genre;
 use App\Artist;
 use App\MusicTaste;
 use App\Genre_MusicTaste;
+use App\UserSimilarity;
 use Str;
 use Hash;
 use DB;
@@ -110,7 +111,7 @@ class LoginController extends Controller
         
 
         //VNOS MUSICTASTE V BAZO
-        for ($i = 0; $i < count($data); $i++) {
+        /*for ($i = 0; $i < count($data); $i++) {
             $artist_name = $data[$i]->name;
             $artist_id = $data[$i]->id;
 
@@ -159,42 +160,23 @@ class LoginController extends Controller
             for($z = 0; $z < count($genreIdArray); $z++) {
                 $musicTasteAttach->genres()->attach($genreIdArray[$z]);
             }
-        }
+        }*/
 
-        /*$output = shell_exec('cd python && py script.py '.$getUserId[0]->id.'');
+        $output = shell_exec('cd python && py script.py '.$getUserId[0]->id.'');
         //echo "<pre>" . $output . "</pre>";
         //dd($output);
 
-        $output_split = explode(', ', $output);
+        $similarity = UserSimilarity::firstOrCreate([
+            'user_id' => $getUserId[0]->id
+        ], [
+            'user_id' => $getUserId[0]->id,
+            'similarities' => $output         
+        ]);
 
-        $data = array();
-        $i = 0;
-
-        foreach ($output_split as $item) {
-            $sim_user_id = $item;
-            //dd($sim_user_id);
-            $name = DB::table('users')->select('name')->where(['id' => $sim_user_id])->get();
-            $avatar = DB::table('users')->select('avatar')->where(['id' => $sim_user_id])->get();
-            $some_genres = DB::table('genres')
-                ->select('genres.genre_name')
-                ->selectRaw('count(genres.genre_name) AS count_genres')
-                ->join("genre__music_tastes", "genres.id", "=", "genre__music_tastes.genre_id")
-                ->join("music_tastes", "music_tastes.id", "=", "genre__music_tastes.music_taste_id")
-                ->join("users", "users.id", "=", "music_tastes.user_id")
-                ->where(['users.id' => $sim_user_id])->groupBy("genres.genre_name")->orderBy('count_genres', 'DESC')->get(); 
-            $favorite_artist = DB::table('artists')
-                ->join("music_tastes", "music_tastes.artist_id", "=", "artists.id")    
-                ->join("users", "users.id", "=", "music_tastes.user_id") 
-                ->select('artists.artist_id')
-                ->where(['users.id' => $sim_user_id])->first();
-
-            $combined = array();       
-            array_push($combined, $sim_user_id, $name, $avatar, $some_genres, $favorite_artist);  
-            
-            array_push($data, $combined);
+        if($similarity->wasRecentlyCreated == false) {
+            DB::table('user_similarities')->where('user_id', $getUserId[0]->id)->update(['similarities' => $output]);
         }
 
-        Session::put('data', $data);*/
         //USER LOGIN
         Auth::login($user);
         return redirect('home');

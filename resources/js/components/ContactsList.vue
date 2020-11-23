@@ -7,7 +7,7 @@
                 <a href="/home"><img class="user_avatar" :src="user.avatar" width="50" height="50"></a>
                 <h4><a v-bind:href="'/profile/' + user.id" class="avatar_text">My Profile</a></h4>
                 <form id="logout-form" action="/logout" method="POST">
-                    @csrf
+                    <input type="hidden" name="_token" :value="csrf">
                     <input type="image" src="/images/logout.png" alt="" width="25" height="25">
                 </form>
             </div>
@@ -65,6 +65,11 @@
                     }
                 }
             }
+        },
+        computed: {
+            csrf() {
+                return document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+            },
         }
     }
 </script>

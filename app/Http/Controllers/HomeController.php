@@ -32,11 +32,8 @@ class HomeController extends Controller
     {
         $user = Auth::user();
 
-        $output = shell_exec('cd python && py script.py '.$user->id.'');
-        //echo "<pre>" . $output . "</pre>";
-        //dd($output);
-
-        $output_split = explode(', ', $output);
+        $output = DB::table('user_similarities')->select('similarities')->where(['id' => $user->id])->get();
+        $output_split = explode(', ', $output[0]->similarities);
 
         $data = array();
 
@@ -63,7 +60,7 @@ class HomeController extends Controller
             
             array_push($data, $combined);
         }
-
+        
         //Session::put('data', $data);
 
         //$data = (Session::has('data')) ? Session::get('data') : null;

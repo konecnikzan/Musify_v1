@@ -93,11 +93,9 @@
             y.style.display = "block";
         }
         
-        window.Laravel = {!! json_encode([
-            'csrfToken' => csrf_token(),
-            'baseUrl' => url('/'),
-            'routes' => collect(\Route::getRoutes())->mapWithKeys(function ($route) { return [$route->getName() => $route->uri()]; })
-        ]) !!};
+        var Laravel = {
+            'csrfToken' : '{{csrf_token()}}'
+        };
     </script>
 
 </body>

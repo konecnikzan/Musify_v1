@@ -2067,6 +2067,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     user: {
@@ -2093,6 +2094,11 @@ __webpack_require__.r(__webpack_exports__);
           }
         }
       }
+    }
+  },
+  computed: {
+    csrf: function csrf() {
+      return document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     }
   }
 });
@@ -65692,10 +65698,29 @@ var render = function() {
           )
         ]),
         _vm._v(" "),
-        _vm._m(0)
+        _c(
+          "form",
+          { attrs: { id: "logout-form", action: "/logout", method: "POST" } },
+          [
+            _c("input", {
+              attrs: { type: "hidden", name: "_token" },
+              domProps: { value: _vm.csrf }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              attrs: {
+                type: "image",
+                src: "/images/logout.png",
+                alt: "",
+                width: "25",
+                height: "25"
+              }
+            })
+          ]
+        )
       ]),
       _vm._v(" "),
-      _vm._m(1),
+      _vm._m(0),
       _vm._v(" "),
       _c(
         "div",
@@ -65765,26 +65790,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "form",
-      { attrs: { id: "logout-form", action: "/logout", method: "POST" } },
-      [
-        _c("input", {
-          attrs: {
-            type: "image",
-            src: "/images/logout.png",
-            alt: "",
-            width: "25",
-            height: "25"
-          }
-        })
-      ]
-    )
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
