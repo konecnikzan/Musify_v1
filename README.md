@@ -6,3 +6,6 @@ Some key features include:
 - chatting with users
 - accessing different user profiles
 - accessing your own user profile
+
+![img](https://user-images.githubusercontent.com/19324025/101760886-c4dd0500-3adb-11eb-98ed-1f1a4d78ecfa.PNG)
+
