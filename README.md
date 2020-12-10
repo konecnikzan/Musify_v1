@@ -9,3 +9,8 @@ Some key features include:
 
 ![img](https://user-images.githubusercontent.com/19324025/101760886-c4dd0500-3adb-11eb-98ed-1f1a4d78ecfa.PNG)
 
+![profile_page](https://user-images.githubusercontent.com/19324025/101761011-f05fef80-3adb-11eb-876c-02341558a601.PNG)
+
+![message_page](https://user-images.githubusercontent.com/19324025/101761048-fc4bb180-3adb-11eb-8fb2-3d53b7cba3c5.PNG)
+
+
