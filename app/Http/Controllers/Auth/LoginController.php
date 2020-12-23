@@ -65,7 +65,6 @@ class LoginController extends Controller
     }
 
     public function handleProviderCallback($provider) {
-        Auth::logout();
         $user = Socialite::driver($provider)->user();
 
         $token = $user->token;
@@ -111,7 +110,7 @@ class LoginController extends Controller
         
 
         //VNOS MUSICTASTE V BAZO
-        /*for ($i = 0; $i < count($data); $i++) {
+        for ($i = 0; $i < count($data); $i++) {
             $artist_name = $data[$i]->name;
             $artist_id = $data[$i]->id;
 
@@ -160,7 +159,7 @@ class LoginController extends Controller
             for($z = 0; $z < count($genreIdArray); $z++) {
                 $musicTasteAttach->genres()->attach($genreIdArray[$z]);
             }
-        }*/
+        }
 
         $output = shell_exec('cd python && py script.py '.$getUserId[0]->id.'');
         //echo "<pre>" . $output . "</pre>";
