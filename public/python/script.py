@@ -27,7 +27,6 @@ def main():
     Rating_avg = pd.merge(Ratings, Mean, on='userID')
     Rating_avg['adg_rating'] = Rating_avg['rating_x'] - Rating_avg['rating_y']
 
-
     final = pd.pivot_table(Rating_avg, values='adg_rating', index='userID', columns='genreID')
 
     final_user = final.apply(lambda row: row.fillna(row.mean()), axis=1)
@@ -37,9 +36,6 @@ def main():
     similarity_with_user = pd.DataFrame(b, index=final_user.index)
     similarity_with_user.columns = final_user.index
     similarity_with_user = similarity_with_user.round(5)
-
-    #print(similarity_with_user)
-    #print("\n")
 
     user_id = sys.argv[1].strip("''")
 
@@ -60,12 +56,5 @@ def UserSimilarity(table, user1):
     # print("Uporabniki, ki imajo podoben okus uporabniku " + str(user1) + " so po vrstnem redu: " + similiarUsers[:-2])
     print(similiarUsers[:-2])
 
-
-def main2():
-    print("hello")
-    print(str(sys.argv[1]))
-
-
 if __name__ == "__main__":
     main()
-

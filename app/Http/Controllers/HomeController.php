@@ -31,8 +31,7 @@ class HomeController extends Controller
     public function index()
     {
         $user = Auth::user();
-
-        $output = DB::table('user_similarities')->select('similarities')->where(['id' => $user->id])->get();
+        $output = DB::table('user_similarities')->select('similarities')->where(['user_id' => $user->id])->get();
         $output_split = explode(', ', $output[0]->similarities);
 
         $data = array();

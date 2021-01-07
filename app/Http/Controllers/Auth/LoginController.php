@@ -99,7 +99,7 @@ class LoginController extends Controller
             'Accept' => 'application/json',
             'Content-Type' => 'application/json',
             'Authorization' => 'Bearer ' . $token
-        ])->get('https://api.spotify.com/v1/me/top/artists?time_range=medium_term&limit=10&offset=0'); 
+        ])->get('https://api.spotify.com/v1/me/top/artists?time_range=long_term&limit=10&offset=0'); 
 
         $response = json_decode($request->getBody());
 
@@ -163,7 +163,6 @@ class LoginController extends Controller
 
         $output = shell_exec('cd python && py script.py '.$getUserId[0]->id.'');
         //echo "<pre>" . $output . "</pre>";
-        //dd($output);
 
         $similarity = UserSimilarity::firstOrCreate([
             'user_id' => $getUserId[0]->id
