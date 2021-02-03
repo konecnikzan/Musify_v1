@@ -6,7 +6,6 @@ from sklearn.metrics.pairwise import cosine_similarity
 import sys
 import ast
 
-
 def main():
 
     response = requests.get('http://musify.com/api/similarity')

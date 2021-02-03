@@ -121,9 +121,12 @@ class LoginController extends Controller
                 'artist_id' => $artist_id          
             ]);
 
-            $image = $data[$i]->images[0]->url;
-            $image_width = $data[$i]->images[0]->width;
-            $image_height = $data[$i]->images[0]->height;          
+            if(isset($data[$i]->images[0]->url)) {
+
+                $image = $data[$i]->images[0]->url;
+                $image_width = $data[$i]->images[0]->width;
+                $image_height = $data[$i]->images[0]->height; 
+            }
 
             $getArtistId = DB::table('artists')->select('id')->where('artist_id', '=', $artist_id)->get();
 
@@ -153,8 +156,10 @@ class LoginController extends Controller
             }
 
             $getMusicTasteId = DB::table('music_tastes')->select('id')->where(['user_id' => $getUserId[0]->id, 'artist_id' => $getArtistId[0]->id])->get();
-            $musicTasteAttach = MusicTaste::find($getMusicTasteId[0]->id);
-            $musicTasteAttach->genres()->detach();	
+            if(isset($getMusicTasteId[0]->id)) {
+                $musicTasteAttach = MusicTaste::find($getMusicTasteId[0]->id);
+                $musicTasteAttach->genres()->detach();	
+            }
 
             for($z = 0; $z < count($genreIdArray); $z++) {
                 $musicTasteAttach->genres()->attach($genreIdArray[$z]);
